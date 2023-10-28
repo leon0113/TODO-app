@@ -1,5 +1,21 @@
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { useTodoContext } from "../context/TodoContext";
+
 function TodoItem({ todo }) {
 
+    const [isTodoEditable, setIsTodoEditable] = useState(false);
+    const [todoMsg, setTodoMsg] = useState(todo.todo);
+
+    const { updateTodo, toggleComplete, deleteTodo } = useTodoContext();
+
+    const editTodo = () => {
+        updateTodo(todo.id, { ...todo, todo: todoMsg });
+        setIsTodoEditable(false);
+    };
+    const toggleCompleted = () => {
+        toggleComplete(todo.id);
+    }
 
     return (
         <div
